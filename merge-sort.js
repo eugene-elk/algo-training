@@ -1,24 +1,48 @@
-function mergeSort(arr) {
-  if (arr.length === 1) return arr;
-  if (arr.length === 2) {
-    if (arr[0] > arr[1]) return [arr[1], arr[0]];
-    else return [arr[0], arr[1]];
+function mergeSort(arr, left = 0, right = arr.length - 1) {
+
+  if (left >= right) return;
+
+  const middle = Math.floor((left + right) / 2);
+
+  mergeSort(arr, left, middle);
+  mergeSort(arr, middle + 1, right);
+
+  let i = left;
+  let j = middle + 1;
+  let k = 0;
+  const temp = [];
+
+  // наполняем временный массив
+  while (i <= middle && j <= right) {
+    if (arr[i] <= arr[j]) {
+      temp[k] = arr[i];
+      i++;
+    } else {
+      temp[k] = arr[j];
+      j++;
+    }
+    k++;
   }
 
-  const left = mergeSort(arr.slice(0, arr.length / 2));
-  const right = mergeSort(arr.slice(arr.length / 2));
-  const result = [];
-
-  while (left.length && right.length) {
-    if (left[0] < right[0]) {
-      result.push(left.shift());
-    }
-    else {
-      result.push(right.shift());
-    }
+  // дозаполняем возможными остатками
+  while (i <= middle) {
+    temp[k] = arr[i];
+    i++;
+    k++;
   }
 
-  return result.concat(left, right);
+  while (j <= right) {
+    temp[k] = arr[j];
+    j++;
+    k++;
+  }
+
+  // обновляем эти позиции в основном массиве
+  for (let i = left, k = 0; i <= right; i++, k++) {
+    arr[i] = temp[k];
+  }
+
+  return arr;
 }
 
 const input = [1, 0, 2, 12, 22, 11, -20];
