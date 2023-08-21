@@ -8,13 +8,12 @@ function bracketOrder(str) {
   };
 
   const values = new Set(Object.values(brackets));
-  const keys = new Set(Object.keys(brackets));
 
   for (let i = 0; i < str.length; i++) {
     const current = str[i];
     if (values.has(current)) {
       stack.push(current);
-    } else if (keys.has(current)) {
+    } else if (brackets.hasOwnProperty(current)) {
       if (stack.pop() !== brackets[current]) {
         return false;
       }
