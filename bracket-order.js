@@ -4,14 +4,17 @@ function bracketOrder(str) {
   const brackets = {
     '}': '{',
     ']': '[',
-    ')': '('
+    ')': '(',
   };
+
+  const values = Object.values(brackets);
+  const keys = Object.keys(brackets);
 
   for (let i = 0; i < str.length; i++) {
     const current = str[i];
-    if (Object.values(brackets).includes(current)) {
+    if (values.includes(current)) {
       stack.push(current);
-    } else if (Object.keys(brackets).includes(current)) {
+    } else if (keys.includes(current)) {
       if (stack.pop() !== brackets[current]) {
         return false;
       }
@@ -22,7 +25,7 @@ function bracketOrder(str) {
 }
 
 let goodStringWithBrackets = "[]([{123}22]3{(31)})";
-let badStringWithBrackets = "[]([{123}22(]3){(31)})";
+let badStringWithBrackets = "(foo[0]0])";
 
 console.log(bracketOrder(goodStringWithBrackets));
 console.log(bracketOrder(badStringWithBrackets));
