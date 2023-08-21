@@ -26,10 +26,10 @@ const tree = {
   }
 }
 
-function DFS_resursive(tree) {
+function DFS_recursive(tree) {
   console.log(tree.value);
-  if (tree.left) DFS_resursive(tree.left);
-  if (tree.right) DFS_resursive(tree.right);
+  if (tree.left) DFS_recursive(tree.left);
+  if (tree.right) DFS_recursive(tree.right);
 }
 
 function DFS_stack(tree) {
@@ -45,7 +45,7 @@ function DFS_stack(tree) {
 }
 
 console.log("DFS recursive result:");
-DFS_resursive(tree);
+DFS_recursive(tree);
 
 console.log("DFS stack result:");
 DFS_stack(tree);
