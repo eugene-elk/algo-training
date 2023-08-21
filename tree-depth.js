@@ -26,10 +26,27 @@ const tree = {
   }
 }
 
-function DFS(tree) {
+function DFS_resursive(tree) {
   console.log(tree.value);
-  if (tree.left) DFS(tree.left);
-  if (tree.right) DFS(tree.right);
+  if (tree.left) DFS_resursive(tree.left);
+  if (tree.right) DFS_resursive(tree.right);
 }
 
-DFS(tree);
+function DFS_stack(tree) {
+  const stack = [tree];
+
+  while (stack.length > 0) {
+    const currentNode = stack.pop();
+    console.log(currentNode.value);
+
+    if (currentNode.right) stack.push(currentNode.right);
+    if (currentNode.left) stack.push(currentNode.left);
+  }
+}
+
+console.log("DFS recursive result:");
+DFS_resursive(tree);
+
+console.log("DFS stack result:");
+DFS_stack(tree);
+
